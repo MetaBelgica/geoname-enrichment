@@ -120,10 +120,15 @@ def main(inputFilename, configFilename, idColumn, placenameColumn, countrynameCo
           foundIdentifiers = ', '.join(resultIdentifierStrings)
           if foundIdentifiers in config["hardcodedMappings"]:
             identifierFromMapping = config["hardcodedMappings"][foundIdentifiers][0]
-            matchedResult = next((item for item in res if item['geonameId'] == identifierFromMapping), None)
-            geonameId, geonamePlacename, geonameCountryCode = getGeonameOutput(res[0], config)
+
+            # take the result that matches with the provided identifier from the hardcoded mapping
+            # comparison should properly compare string values, not string and int (https://github.com/MetaBelgica/geoname-enrichment-issues/1)
+            matchedResult = next((item for item in res if str(item['geonameId']) == identifierFromMapping), None)
+            geonameId, geonamePlacename, geonameCountryCode = getGeonameOutput(matchedResult, config)
+
             outputWriter.writerow({idColumn: rowID, "geonameID": geonameId, "placename": geonamePlacename, "countryCode": geonameCountryCode})
             mappingFixedMultipleResultsCounter += 1
+            logger.warning(f'Multiple API results resolved for "{placename} ({countryName})" ({rowID}): ' +  f'chosen "{geonamePlacename} ({geonameCountryCode},{geonameId})" from ' + ', '.join(resultStrings) + f' based on mapping {identifierFromMapping}', extra={'identifier': rowID, 'message_type': csv_logger.MESSAGE_TYPES['MULTIPLE_API_RESULTS']}) 
           else:
             logger.warning(f'More than one API result for "{placename} ({countryName})" ({rowID}): ' + ', '.join(resultStrings), extra={'identifier': rowID, 'message_type': csv_logger.MESSAGE_TYPES['MULTIPLE_API_RESULTS']})
             multipleAPIResultsCounter += 1
