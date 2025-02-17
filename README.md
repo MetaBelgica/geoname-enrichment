@@ -1,6 +1,9 @@
 # Geoname Enrichment
 
-This Python script reads placenames from CSV files and queries a custom API on top of geonames data to enrich the geoname identifier.
+This Python script reads placenames from CSV files and queries a custom API on top of geonames data to enrich the geoname identifier. The API and geonames database are available under Open Licenses at:
+
+- [Geonames Lookup API](https://github.com/kbrbe/geonames-lookup) [![DOI](https://zenodo.org/badge/14883863.svg)](https://zenodo.org/badge/latestdoi/14883863)
+- [Geonames MySQL database](https://github.com/GeoNames-MySQL-DataImport) [![DOI](https://zenodo.org/badge/14883685.svg)](https://zenodo.org/badge/latestdoi/14883685)
 
 ## Usage via the command line
 
