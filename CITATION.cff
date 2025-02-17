@@ -4,8 +4,7 @@ authors:
 - family-names: "Lieber"
   given-names: "Sven"
   orcid: "https://orcid.org/0000-0002-7304-3787"
-title: "Geoname enrichtment"
+title: "Geoname enrichment"
 version: 0.1.0
-doi: 10.5281/zenodo.10011417
-date-released: 2025-01-13
+date-released: 2025-02-17
 url: "https://github.com/metabelgica/geoname-enrichment"
