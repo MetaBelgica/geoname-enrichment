@@ -114,7 +114,7 @@ def main(inputFilename, configFilename, idColumn, placenameColumn, countrynameCo
           resultStrings = []
           for r in res:
             resultIdentifierStrings.append(f'{r["geonameId"]}')
-            resultStrings.append(f'{r["name"]} ({r["country"]}, {r["geonameId"]})')
+            resultStrings.append(f'{r["name"]} ({r["country"]}, {r["geonameId"]}, population: {r["population"]})')
 
           logger.debug(f'multiple API results: {resultStrings}')
           foundIdentifiers = ', '.join(resultIdentifierStrings)
